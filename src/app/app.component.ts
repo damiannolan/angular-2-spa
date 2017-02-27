@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ApiService } from './api-test.service';
 
 @Component({
   selector: 'app-root',
@@ -10,16 +8,8 @@ import { ApiService } from './api-test.service';
 export class AppComponent {
   private title = 'app works!';
   
-  constructor(private apiService: ApiService) {
+  constructor() {
 
-  }
-
-  getMessage() {
-    this.apiService.makeHttpRequest()
-      .subscribe(
-        resp => console.log(resp),
-        error => console.log(error)
-      );
   }
   
 }
