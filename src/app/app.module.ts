@@ -6,24 +6,29 @@ import { HttpModule } from '@angular/http';
 import { appRoutes } from './app.routes';
 
 import { AppComponent } from './app.component';
-import { ApiService } from './api-test.service';
 import { AboutComponent } from './about/about.component';
 import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
+
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
     AppComponent,
     AboutComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    appRoutes
+    appRoutes,
   ],
   providers: [
-    ApiService
+    AuthService,
+    AuthGuard,
   ],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ApiService } from './../api-test.service';
+import { AuthService } from '../services/auth.service';
+import { User } from '../model/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,18 +11,15 @@ import { ApiService } from './../api-test.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private apiService: ApiService) {
+  constructor(private authService: AuthService, private router: Router) { }
 
+  login() {
+    this.authService.loginWithFacebook().then((user: User) => {
+      // console.log(user);
+      // Route to Home component ['/']
+      this.router.navigate(['/']);
+    });
   }
-
-  getMessage() {
-    this.apiService.makeHttpRequest()
-      .subscribe(
-        resp => console.log(resp),
-        error => console.log(error)
-      );
-  }
-
 
   ngOnInit() {
   }

@@ -21,7 +21,9 @@
     "@angular/platform-browser": "^2.3.1",
     "@angular/platform-browser-dynamic": "^2.3.1",
     "@angular/router": "^3.3.1",
+    "angular-2-local-storage": "^1.0.1",
     "core-js": "^2.4.1",
+    "hellojs": "^1.14.0",
     "jquery": "^3.1.1",
     "rxjs": "^5.0.1",
     "semantic-ui-css": "^2.2.9",
@@ -30,6 +32,7 @@
   },
   "devDependencies": {
     "@angular/compiler-cli": "^2.3.1",
+    "@types/hellojs": "^0.2.31",
     "@types/jasmine": "2.5.38",
     "@types/node": "^6.0.42",
     "angular-cli": "1.0.0-beta.26",
