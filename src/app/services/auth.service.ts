@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import * as hello from 'hellojs';
 import 'rxjs/add/operator/catch';
@@ -15,7 +16,7 @@ export class AuthService {
   private user: User = null;
 
   // Inject the http module
-  constructor(private http: Http) { }
+  constructor(private http: Http, private router: Router) { }
 
   /*
   - Initate the hellojs environment 
@@ -56,9 +57,11 @@ export class AuthService {
         this.http.post(this.authEndPoint, credentials, options)
           .map((res) => res.json())
           .subscribe((tokenResponse: any) => {
+            const accessToken = tokenResponse.accessToken;
             // save to local storage
-            //console.log(tokenResponse);
-            this.user = this.getUserFromToken(tokenResponse);
+            localStorage.setItem('token', accessToken);
+            //console.log('tokenResponse', tokenResponse);
+            this.user = this.getUserFromToken(accessToken);
             resolve(this.user);
           });
       });
@@ -73,7 +76,7 @@ export class AuthService {
   - https://www.w3schools.com/jsref/met_win_atob.asp
   */
   private getUserFromToken(token: any): User {
-    const accessToken = token.accessToken;
+    const accessToken = token;
     const tokenBody = accessToken.split('.')[1];
     const user = JSON.parse(atob(tokenBody));
     return user;
@@ -85,6 +88,10 @@ export class AuthService {
       // replace with localstorage get
       // get the token from local storage
       // getUserFromToken(token)
+
+      const token = localStorage.getItem('token');
+
+      this.user = this.getUserFromToken(token);
 
       console.log("getUser()");
       if(this.user)
@@ -100,6 +107,16 @@ export class AuthService {
       //     return reject('no user found');
       // });
     });
+  }
+
+  public isLoggedIn(): boolean {
+    if (localStorage.getItem('token') === null) {
+      this.router.navigate(['/login']);
+      return false;
+    }
+    else {
+      return true;
+    }
   }
 
 }

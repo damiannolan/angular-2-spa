@@ -11,11 +11,13 @@ export class AuthGuard implements CanActivate {
   */
   constructor(private authService: AuthService, private router: Router) { }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean/*Promise<boolean>*/ {
     let url: string = state.url;
 
-    return this.checkLogin(url);
+    //return this.checkLogin(url);
+    return this.authService.isLoggedIn();
   }
+
 
   // Can maybe change to use an isLoggedIn() function from AuthService
   // isLoggedIn() will check if a user/token is present in localstorage
@@ -28,7 +30,6 @@ export class AuthGuard implements CanActivate {
           resolve(user ? true : false);
         })
         .catch(() => {
-          this.router.navigate(['/login']);
           resolve(false);
         });
     });
