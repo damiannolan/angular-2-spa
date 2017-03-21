@@ -1,0 +1,27 @@
+/* Mobile */
+.sidebar-container {
+  width: 180px;
+  overflow: hidden;
+  height: 100%;
+  position: fixed;
+  margin: 0;
+  top: 0;
+  left: 0;
+}
+
+/* Tablet / iPad Portrait */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .sidebar-container {
+    width: 200px;
+  }
+}
+
+@media only screen and (min-width: 991px) {
+  .sidebar-container {
+    width: 260px;
+  }
+}
+
+.sidebar::-webkit-scrollbar { width: 0 !important }
+.sidebar { -ms-overflow-style: none; }
+.sidebar { overflow: -moz-scrollbars-none; }
