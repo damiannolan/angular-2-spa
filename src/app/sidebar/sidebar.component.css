@@ -1,6 +1,6 @@
 /* Mobile */
 .sidebar-container {
-  width: 180px;
+  width: 150px;
   overflow: hidden;
   height: 100%;
   position: fixed;
@@ -12,13 +12,13 @@
 /* Tablet / iPad Portrait */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .sidebar-container {
-    width: 200px;
+    width: 180px;
   }
 }
 
 @media only screen and (min-width: 991px) {
   .sidebar-container {
-    width: 260px;
+    width: 180px;
   }
 }
 

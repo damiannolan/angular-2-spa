@@ -17,8 +17,8 @@ export class AuthGuard implements CanActivate {
     //return this.checkLogin(url);
     return this.authService.isLoggedIn();
   }
-
-
+  /*
+  // !!!! NOT GETTING CALLED !!!!
   // Can maybe change to use an isLoggedIn() function from AuthService
   // isLoggedIn() will check if a user/token is present in localstorage
   // Returning either true or false
@@ -33,5 +33,5 @@ export class AuthGuard implements CanActivate {
           resolve(false);
         });
     });
-  }
+  }*/
 }

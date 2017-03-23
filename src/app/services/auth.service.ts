@@ -82,6 +82,11 @@ export class AuthService {
     return user;
   }
 
+  public getUser(): User {
+    this.user = this.getUserFromToken(localStorage.getItem('token'));
+    return this.user;
+  }
+  /*
   public getUser(): Promise<User> {
     return new Promise((resolve, reject) => {
 
@@ -108,6 +113,7 @@ export class AuthService {
       // });
     });
   }
+  */
 
   public isLoggedIn(): boolean {
     if (localStorage.getItem('token') === null) {
