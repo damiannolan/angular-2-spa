@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import * as hello from 'hellojs';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import * as base64 from 'base-64';
 
 import { User } from '../model/user';
 
@@ -50,13 +51,17 @@ export class AuthService {
           accessToken: socialToken,
         };
 
-        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const headers = new Headers({
+//          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json' 
+        });
         const options = new RequestOptions(headers);
 
         // http post exchange tokens
         this.http.post(this.authEndPoint, credentials, options)
           .map((res) => res.json())
           .subscribe((tokenResponse: any) => {
+            console.log(tokenResponse);
             const accessToken = tokenResponse.accessToken;
             // save to local storage
             localStorage.setItem('token', accessToken);
@@ -79,6 +84,7 @@ export class AuthService {
     const accessToken = token;
     const tokenBody = accessToken.split('.')[1];
     const user = JSON.parse(atob(tokenBody));
+    user.pictureUrl = atob(user.pictureUrl);
     return user;
   }
 

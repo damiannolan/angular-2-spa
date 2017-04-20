@@ -2,24 +2,33 @@
   <app-sidebar></app-sidebar>
   <div class='pusher'>
     <br />
-    <h1>Hello from homepage</h1>
-    <p>Content posts and text area for new posts will go here</p>
-
-    <div class='ui comments'>
-      <form class='ui reply form'>
-        <div class='field'>
-          <input type='text' placeholder='Title'>
-        </div>
+    <h1>Submit a New Post</h1>
+    
+    <form class="ui form attached fluid segment">
+      <div class="two fields">
         <div class="field">
-          <textarea placeholder='Start writing...'></textarea>
+          <label>Title</label>
+          <input placeholder="Title" type="text">
         </div>
-        <div class="ui blue labeled submit icon button">
-          <i class="icon edit"></i> Submit
+
+        <div class="field">
+          <label>Category</label>
+          <select>
+            <option>Guitar</option>
+            <option>Drums</option>
+            <option>Bass</option>
+            <option>DJ and Audio Production</option>
+            <option>Other</option>
+          </select>
         </div>
-      </form>
-    </div>
+      </div>
 
+      <div class="field">
+        <label>Info</label>
+        <textarea></textarea>
+      </div>
 
-
+      <div class="ui blue submit button">Submit</div>
+    </form>
   </div>
 </div>

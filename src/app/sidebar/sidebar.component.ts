@@ -18,4 +18,8 @@ export class SidebarComponent implements OnInit {
     console.log(this.user);
   }
 
+  getImageUrl() {
+    return atob(this.user.pictureUrl);
+  }
+
 }
