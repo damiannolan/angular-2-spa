@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { PostEditorComponent } from './post-editor/post-editor.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     AboutComponent,
     LoginComponent,
     HomeComponent,
-    SidebarComponent
+    SidebarComponent,
+    PostEditorComponent
   ],
   imports: [
     BrowserModule,
