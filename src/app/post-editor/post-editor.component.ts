@@ -9,19 +9,32 @@ import { PicklistService } from '../services/picklist.service';
 })
 export class PostEditorComponent implements OnInit {
 
-  private postForm : FormGroup;
+  private postForm: FormGroup;
 
-  private categoryList : string[];
+  private categoryList: string[];
 
-  constructor(private picklist: PicklistService, public formBuilder: FormBuilder) { }
+  constructor(private picklist: PicklistService, public formBuilder: FormBuilder) {
+
+    this.postForm = this.formBuilder.group({
+      title: ['', Validators.compose([Validators.required])],
+      category: ['', Validators.compose([Validators.required])],
+      body: ['', Validators.compose([Validators.required])]
+    });
+
+    //this.postForm.setValue({category: this.categoryList[0]});
+  }
 
   ngOnInit() {
+    // Populate the categoryList via the PicklistService
     this.picklist.getCategories().then((categoryList: string[]) => {
       this.categoryList = categoryList;
+
       console.log(this.categoryList);
-    })
-    //this.categoryList = this.picklist.getCategories();
-    
+    });
+  }
+
+  onSubmit(value: any) {
+    console.log(value);
   }
 
 }

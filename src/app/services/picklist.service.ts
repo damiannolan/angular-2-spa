@@ -17,8 +17,6 @@ export class PicklistService {
       // Retrieve jwt from localStorage
       let jwt = localStorage.getItem('token');
 
-      console.log(jwt);
-
       // Create new Headers() object
       const headers = new Headers({
         'Authorization': `Bearer ${jwt}`,

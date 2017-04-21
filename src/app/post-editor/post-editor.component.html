@@ -5,31 +5,27 @@
     <h1>Submit a New Post</h1>
     
     
-    <form class="ui form attached fluid segment">
+    <form class="ui form attached fluid segment" [formGroup]="postForm">
       <div class="two fields">
         <div class="field">
           <label>Title</label>
-          <input placeholder="Title" type="text">
+          <input placeholder="Title" type="text" formControlName="title">
         </div>
 
         <div class="field">
           <label>Category</label>
-          <select>
-            <option>Guitar</option>
-            <option>Drums</option>
-            <option>Bass</option>
-            <option>DJ and Audio Production</option>
-            <option>Other</option>
+          <select formControlName="category">
+            <option *ngFor="let category of categoryList" [value]="category">{{ category }}</option>
           </select>
         </div>
       </div>
 
       <div class="field">
-        <label>Info</label>
-        <textarea></textarea>
+        <label>Body</label>
+        <textarea formControlName="body"></textarea>
       </div>
 
-      <div class="ui blue submit button">Submit</div>
+      <button type="button" class="ui blue submit button" (click)="onSubmit(postForm.value)">Submit</button>
     </form>
   </div>
 </div>
