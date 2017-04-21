@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PicklistService } from '../services/picklist.service';
 
 @Component({
   selector: 'app-post-editor',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostEditorComponent implements OnInit {
 
-  constructor() { }
+  categoryList : string[];
+
+  constructor(private picklist: PicklistService) { }
 
   ngOnInit() {
+    this.categoryList = this.picklist.getCategories();
   }
 
 }

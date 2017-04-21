@@ -5,13 +5,14 @@ import { HttpModule } from '@angular/http';
 
 import { appRoutes } from './app.routes';
 
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './guards/auth.guard';
+import { PicklistService } from './services/picklist.service';
+
 import { AppComponent } from './app.component';
 import { AboutComponent } from './about/about.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-
-import { AuthService } from './services/auth.service';
-import { AuthGuard } from './guards/auth.guard';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { PostEditorComponent } from './post-editor/post-editor.component';
 
@@ -33,6 +34,7 @@ import { PostEditorComponent } from './post-editor/post-editor.component';
   providers: [
     AuthService,
     AuthGuard,
+    PicklistService,
   ],
   bootstrap: [AppComponent]
 })

@@ -92,35 +92,7 @@ export class AuthService {
     this.user = this.getUserFromToken(localStorage.getItem('token'));
     return this.user;
   }
-  /*
-  public getUser(): Promise<User> {
-    return new Promise((resolve, reject) => {
-
-      // replace with localstorage get
-      // get the token from local storage
-      // getUserFromToken(token)
-
-      const token = localStorage.getItem('token');
-
-      this.user = this.getUserFromToken(token);
-
-      console.log("getUser()");
-      if(this.user)
-        return resolve(this.user);
-      else
-        return reject('no user found');
-
-      // setTimeout(() => {
-      //   console.log("getUser");
-      //   if (this.user)
-      //     return resolve(this.user);
-      //   else
-      //     return reject('no user found');
-      // });
-    });
-  }
-  */
-
+  
   public isLoggedIn(): boolean {
     if (localStorage.getItem('token') === null) {
       this.router.navigate(['/login']);
