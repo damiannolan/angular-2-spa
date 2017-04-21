@@ -10,7 +10,7 @@ import { Article } from '../model/article';
 export class ArticleService {
 
   private createArticleEndPoint = 'http://127.0.0.1:3000/createArticle';
-  
+
   constructor(private http: Http) { }
 
   public createArticle(article: Article): Promise<any> {
@@ -27,7 +27,11 @@ export class ArticleService {
       // Pass the headers into a new RequestOptions() object
       const options = new RequestOptions({ headers, withCredentials: true });
 
-      //this.http.post(this.createArticleEndPoint, article, options)
+      this.http.post(this.createArticleEndPoint, {article}, options)
+        .map((res) => console.log(res))
+        .subscribe((response:any) => {
+          resolve();
+        });
 
     });
   }

@@ -89,8 +89,8 @@ export class AuthService {
   }
 
   public getUser(): User {
-    this.user = this.getUserFromToken(localStorage.getItem('token'));
-    return this.user;
+    //this.user = this.getUserFromToken(localStorage.getItem('token'));
+    return this.getUserFromToken(localStorage.getItem('token'));
   }
   
   public isLoggedIn(): boolean {
