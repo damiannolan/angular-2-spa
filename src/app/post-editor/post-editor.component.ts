@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PicklistService } from '../services/picklist.service';
 
 @Component({
@@ -8,12 +9,19 @@ import { PicklistService } from '../services/picklist.service';
 })
 export class PostEditorComponent implements OnInit {
 
-  categoryList : string[];
+  private postForm : FormGroup;
 
-  constructor(private picklist: PicklistService) { }
+  private categoryList : string[];
+
+  constructor(private picklist: PicklistService, public formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.categoryList = this.picklist.getCategories();
+    this.picklist.getCategories().then((categoryList: string[]) => {
+      this.categoryList = categoryList;
+      console.log(this.categoryList);
+    })
+    //this.categoryList = this.picklist.getCategories();
+    
   }
 
 }
