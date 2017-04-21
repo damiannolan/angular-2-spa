@@ -4,15 +4,16 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
-@Injectable()
-export class PicklistService {
-  private categoriesEndPoint = 'http://127.0.0.1:3000/categories';
-  private categoriesList: string[];
+import { Article } from '../model/article';
 
-  // DI the Http module
+@Injectable()
+export class ArticleService {
+
+  private createArticleEndPoint = 'http://127.0.0.1:3000/createArticle';
+  
   constructor(private http: Http) { }
 
-  public getCategories(): Promise<string[]> {
+  public createArticle(article: Article): Promise<any> {
     return new Promise((resolve, reject) => {
       // Retrieve jwt from localStorage
       let jwt = localStorage.getItem('token');
@@ -26,13 +27,8 @@ export class PicklistService {
       // Pass the headers into a new RequestOptions() object
       const options = new RequestOptions({ headers, withCredentials: true });
 
-      // Call the categories backend endpoint, map() & subscribe() the response
-      this.http.get(this.categoriesEndPoint, options)
-        .map((res) => res.json())
-        .subscribe((res: any) => {
-          resolve(res as string[]);
-        });
-    });
-  };
+      //this.http.post(this.createArticleEndPoint, article, options)
 
+    });
+  }
 }

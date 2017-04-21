@@ -10,9 +10,8 @@ import { Article } from '../model/article';
 })
 export class PostEditorComponent implements OnInit {
 
-  
   private postForm: FormGroup;
-
+  private article: Article;
   private categoryList: string[];
 
   constructor(private picklist: PicklistService, public formBuilder: FormBuilder) {
@@ -36,7 +35,11 @@ export class PostEditorComponent implements OnInit {
   }
 
   onSubmit(value: Article) {
-    console.log(value);
-  }
+    this.article = value;
+    console.log(this.article);
+    
+    // send to server
+    // re-direct to home
+}
 
 }

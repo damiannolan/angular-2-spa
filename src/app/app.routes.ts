@@ -22,7 +22,8 @@ const routes: Routes = [
     },
     {
         path: 'submit',
-        component: PostEditorComponent
+        component: PostEditorComponent,
+        canActivate: [AuthGuard]
     }
 ];
 

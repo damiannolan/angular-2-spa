@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { ReactiveFormsModule } from '@angular/forms'; 
 import { appRoutes } from './app.routes';
 
+import { ArticleService } from './services/article.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 import { PicklistService } from './services/picklist.service';
@@ -33,6 +34,7 @@ import { PostEditorComponent } from './post-editor/post-editor.component';
     ReactiveFormsModule,
   ],
   providers: [
+    ArticleService,
     AuthService,
     AuthGuard,
     PicklistService,
