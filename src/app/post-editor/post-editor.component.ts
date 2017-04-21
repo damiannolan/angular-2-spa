@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PicklistService } from '../services/picklist.service';
+import { Article } from '../model/article';
 
 @Component({
   selector: 'app-post-editor',
@@ -9,6 +10,7 @@ import { PicklistService } from '../services/picklist.service';
 })
 export class PostEditorComponent implements OnInit {
 
+  
   private postForm: FormGroup;
 
   private categoryList: string[];
@@ -33,7 +35,7 @@ export class PostEditorComponent implements OnInit {
     });
   }
 
-  onSubmit(value: any) {
+  onSubmit(value: Article) {
     console.log(value);
   }
 
