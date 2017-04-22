@@ -7,11 +7,3 @@ export interface Article {
   category: string;
   body: string;
 }
-
-export class Article {
-  author: User;
-  createdAt: string;
-  title: string;
-  category: string;
-  body: string;
-}

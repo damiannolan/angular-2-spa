@@ -16,6 +16,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { PostEditorComponent } from './post-editor/post-editor.component';
+import { ArticleListComponent } from './article-list/article-list.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { PostEditorComponent } from './post-editor/post-editor.component';
     LoginComponent,
     HomeComponent,
     SidebarComponent,
-    PostEditorComponent
+    PostEditorComponent,
+    ArticleListComponent
   ],
   imports: [
     BrowserModule,
