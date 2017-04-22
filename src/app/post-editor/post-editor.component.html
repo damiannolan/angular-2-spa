@@ -25,7 +25,8 @@
         <textarea formControlName="body"></textarea>
       </div>
 
-      <button type="button" class="ui blue submit button" (click)="onSubmit(postForm)">Submit</button>
+      <button type="button" class="ui blue submit button" [disabled]="!postForm.valid"
+       (click)="onSubmit(postForm)">Submit</button>
     </form>
   </div>
 </div>
