@@ -5,6 +5,8 @@ import { Article } from '../model/article';
 import { ArticleService } from '../services/article.service';
 import { AuthService } from '../services/auth.service';
 import * as moment from 'moment';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-post-editor',
@@ -17,16 +19,19 @@ export class PostEditorComponent implements OnInit {
   private article: Article;
   private categoryList: string[];
 
-  constructor(private picklist: PicklistService, public formBuilder: FormBuilder,
-    private articleService: ArticleService, private authService: AuthService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private picklist: PicklistService,  
+    private articleService: ArticleService,        
+    private authService: AuthService,  
+    private router: Router) {
     
     this.postForm = this.formBuilder.group({
       title: ['', Validators.compose([Validators.required])],
       category: ['', Validators.compose([Validators.required])],
       body: ['', Validators.compose([Validators.required])],
     });
-
-    
+   
   }
 
   ngOnInit() {
@@ -47,19 +52,16 @@ export class PostEditorComponent implements OnInit {
 
   onSubmit(postForm: FormGroup) {
 
-
     this.article = Object.assign({
       author: this.authService.getUser(),
       createdAt: moment().toISOString()},
       postForm.value);
 
-    //this.article.createdAt = moment().toISOString();
-    console.log(this.article);
-
-    // send to server
+    // Delegate the task of http post for storing the article to the ArticleService
     this.articleService.createArticle(this.article).then((resp: any) => console.log(resp));
 
     // re-direct to home
+    this.router.navigate(['/']);
   }
 
 }
