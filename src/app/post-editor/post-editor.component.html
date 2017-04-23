@@ -14,7 +14,7 @@
 
         <div class="field">
           <label>Category</label>
-          <select formControlName="category">
+          <select class="ui dropdown" formControlName="category">
             <option *ngFor="let category of categoryList" [value]="category">{{ category }}</option>
           </select>
         </div>

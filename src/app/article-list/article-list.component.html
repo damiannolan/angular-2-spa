@@ -1,5 +1,34 @@
-<p>
-  article-list works!
-</p>
+<div class="ui container">
+  <div class="ui grid">
+    <div class="two column row">
+      <div class="left floated column">
+        <!--<div class="ui vertical buttons">
+          <button class="ui blue button">All</button>
+          <button class="ui red button">Guitar</button>
+          <button class="ui violet button">Drums</button>
+          <button class="ui yellow button">Bass</button>
+          <button class="ui grey button">DJ</button>
+          <button class="ui black button">Audio Production</button>
+        </div>-->
+      </div>
 
-<p *ngFor="let article of articles | async">{{ article.title }}</p>
+      <div class="right floated column">
+
+        <div class="ui fluid icon input" style="width: 80%">
+          <input (keyup)="liveSearch($event)" type="text" placeholder="Search..." />
+          <i class="search icon"></i>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <br/>
+
+
+
+  <div class="ui divided items">
+    <app-article *ngFor="let article of articles | async" [article]="article"></app-article>
+  </div>
+</div>
+<!--<p *ngFor="let article of articles | async">{{ article.title }}</p>-->

@@ -1,0 +1,23 @@
+<div class="ui card" style="width: 90%; margin-bottom: 10%">
+  <div class="content">
+    
+    <div class="right floated meta">{{ article.category }}</div>
+
+
+    <img class="ui avatar image" src="{{ article.author.pictureUrl }}"> {{ article.author.firstName }} {{ article.author.lastName
+    }}
+  </div>
+
+  <div class="content">
+    <h4>{{ article.title }}</h4>
+
+    <div class="description">
+      <p>{{ article.body }}</p>
+    </div>
+
+    <div class="right floated meta">{{ article.createdAt }}</div>
+  </div>
+
+  
+
+</div>

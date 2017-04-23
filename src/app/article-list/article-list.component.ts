@@ -9,16 +9,23 @@ import { Article } from '../model/article';
   styleUrls: ['./article-list.component.css']
 })
 export class ArticleListComponent implements OnInit {
-
+  // Used for ngFor repeating articles
+  // The Observable is not an iterable until getAllArtices() returns
+  // Must use async pipe | in html template to allow use of *ngFor
   private articles: Observable<Article[]>;
 
   constructor(private articleService: ArticleService) { 
-    this.articles = articleService.articles;
+    this.articles = articleService.articlesList;
   }
 
   ngOnInit() {
     this.articleService.getArticles();
     console.log(this.articles);
+  }
+
+  liveSearch(evt) {
+    const val = evt.target.value;
+    this.articleService.filterBy(val);
   }
 
 }

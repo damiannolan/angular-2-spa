@@ -14,8 +14,21 @@ export class ArticleService {
 
   private _articles: BehaviorSubject<Article[]> = new BehaviorSubject<Article[]>([]);
   public articles: Observable<Article[]> = this._articles.asObservable();
+  private _filterbySubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  constructor(private http: Http) { }
+  public articlesList: Observable<Article[]>;
+
+
+  constructor(private http: Http) {
+    this.articlesList = Observable.combineLatest(this.articles, this._filterbySubject)
+      .map(([articles, filterStr]) => {
+        // g - global (all matches), i - insensitive case
+        const re = new RegExp(filterStr, 'gi');
+
+        return articles
+          .filter(a => re.exec(a.title))
+      });
+  }
 
   public getArticles(): void {
     // Retrieve jwt from localStorage
@@ -38,8 +51,8 @@ export class ArticleService {
 
         const articles = articlesJSON
           .map(articlejson => Article.fromJSON(articlejson));
-          console.log(articles);
-          this._articles.next(articles);
+        console.log(articles);
+        this._articles.next(articles);
       });
   }
 
@@ -64,5 +77,9 @@ export class ArticleService {
         });
 
     });
+  }
+
+  public filterBy(filter: string): void {
+    this._filterbySubject.next(filter);
   }
 }
