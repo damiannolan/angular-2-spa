@@ -2,18 +2,43 @@
   <div class="ui grid">
     <div class="two column row">
       <div class="left floated column">
-        <!--<div class="ui vertical buttons">
-          <button class="ui blue button">All</button>
-          <button class="ui red button">Guitar</button>
-          <button class="ui violet button">Drums</button>
-          <button class="ui yellow button">Bass</button>
-          <button class="ui grey button">DJ</button>
-          <button class="ui black button">Audio Production</button>
+
+        <div id="categoryFilter" class="ui labeled icon top right pointing dropdown button">
+          <i class="filter icon"></i>
+          <span class="text">Filter Posts</span>
+          <div class="menu">
+            
+            <div class="header">
+              <i class="tags icon"></i> Filter by Category
+            </div>
+            <div class="item" [style.display]="isFiltered ? 'block' : 'none'" (click)="clearFilters()">
+              Clear Filter
+            </div>
+           
+            <div class="item" *ngFor="let category of categoryList" (click)="filterByCategory(category)">
+              {{ category }}
+            </div>
+           
+            
+          </div>
+        </div>
+
+        <!--<label>
+          <i class="filter icon"></i> Filter by Category
+          
+        <select class="ui dropdown">
+          
+          <option value="">None</option>
+          <option *ngFor="let category of categoryList" [value]="category">{{ category }}</option>
+        </select>
+        </label>-->
+        <!--<div class="ui fluid icon">
+          <i class="filter icon"></i>
+
         </div>-->
       </div>
 
       <div class="right floated column">
-
         <div class="ui fluid icon input" style="width: 80%">
           <input (keyup)="liveSearch($event)" type="text" placeholder="Search..." />
           <i class="search icon"></i>

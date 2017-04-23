@@ -54,14 +54,14 @@ export class PostEditorComponent implements OnInit {
 
     this.article = Object.assign({
       author: this.authService.getUser(),
-      createdAt: moment().toISOString()},
+      createdAt: moment(new Date()).toISOString()},
       postForm.value);
 
     // Delegate the task of http post for storing the article to the ArticleService
-    this.articleService.createArticle(this.article).then((resp: any) => console.log(resp));
+    this.articleService.createArticle(this.article).then((resp: any) => this.router.navigate(['/']));
 
     // re-direct to home
-    this.router.navigate(['/']);
+    //this.router.navigate(['/']);
   }
 
 }

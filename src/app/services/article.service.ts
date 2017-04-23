@@ -14,19 +14,21 @@ export class ArticleService {
 
   private _articles: BehaviorSubject<Article[]> = new BehaviorSubject<Article[]>([]);
   public articles: Observable<Article[]> = this._articles.asObservable();
-  private _filterbySubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private _filterbySearchSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private _filterbyCategory: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   public articlesList: Observable<Article[]>;
 
 
   constructor(private http: Http) {
-    this.articlesList = Observable.combineLatest(this.articles, this._filterbySubject)
-      .map(([articles, filterStr]) => {
+    this.articlesList = Observable.combineLatest(this.articles, this._filterbySearchSubject, this._filterbyCategory)
+      .map(([articles, searchStr, category]) => {
         // g - global (all matches), i - insensitive case
-        const re = new RegExp(filterStr, 'gi');
+        const re = new RegExp(searchStr, 'gi');
 
         return articles
-          .filter(a => re.exec(a.title))
+          .filter(a => re.exec(a.title) || re.exec(a.body))
+          .filter(a => a.category === category || category === '')
       });
   }
 
@@ -80,6 +82,10 @@ export class ArticleService {
   }
 
   public filterBy(filter: string): void {
-    this._filterbySubject.next(filter);
+    this._filterbySearchSubject.next(filter);
+  }
+
+  public filterByCategory(filter: string): void {
+    this._filterbyCategory.next(filter);
   }
 }
