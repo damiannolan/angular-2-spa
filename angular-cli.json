@@ -25,8 +25,8 @@
         "../node_modules/jquery/dist/jquery.js",
         "../node_modules/semantic-ui-css/semantic.js"
       ],
-      "environments": {
-        "source": "environments/environment.ts",
+      "environmentSource": "environments/environment.ts",
+      "environments": {       
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }
