@@ -61,6 +61,8 @@ This model resembles the snippet below taken from [developer.mozilla.org](https:
 
 ### Promises and Observables
 
+#### Promises
+
 Promises are in use throughout much of this entire project. Promises are a placeholder or proxy that represent the value or result of an asynchronous operation. A Promise has 3 states it can be in:
 
 - Pending - where the asynchronous operation hasn't completed yet
@@ -68,6 +70,23 @@ Promises are in use throughout much of this entire project. Promises are a place
 - Rejected - where the asynchronous operation is rejected with a reason for failure
 
 In Angular 1.6, Promises were exposed using the $q service. In Angular 2 using Typescript we can have functions that return a Promise of a given type. Promises are considered to be *Thenable*, using the .then() function. The `then()` function takes two arguments which are callback functions to be run for either success or failure of the Promise and also returns a Promise. This is for the use of what is known as Promise chaining.
+
+#### Observables
+
+Observables are a huge part of Angular 2 and come from a library called [RXJS - Reactive Extensions](http://reactivex.io/rxjs/). Reactive Extensions offers a number of different features which employ Functional Reactive Programming. Functional Reactive Programming is a paradigm for asynchronous dataflow programming which uses Functional Programming elements. Reactive Extensions have libraries for various different languages like Java, C# and CPP and it not just catered to web development using Javascript.
+
+Observables are a key concept of RX. An Observable can be thought of as a stream on which an *Observer* can tap into or `subscribe()`. Where Angular 1.6 uses a $http service based on the $q implementation of promises, Angular 2 uses Observables for making HTTP Requests. For example:
+
+A request made to an endpoint for retrieving an array of Articles will return an Observable of type Response - `Observable<Response>`. RXJS offers a large number of different functions that can be used upon an Observable, the one we are most interested in for the case of this project is the `.map()` function. The `.map()` function takes an Observable stream and makes a projection of its data - eg: The stream contains a HTTP response and we want to project the JSON data or body of the response. This can be by calling `.map(res) => res.json()` this can be read as - Project the response, such that we extract the the response's json body.
+However, these projections of data can be chained and we do not actually materialize the result until we call `.subscribe()`. In this instance, by calling `.subscribe(responseJSON)` we are materialising the projection of the response we got initially from our HTTP request. We can then act on the JSON the data that we were after.
+
+The above example is taken from this project in `article.service.ts` file, in which a HTTP response is made to the back-end to retrieve an array of articles.
+
+##### Hot and Cold Observables
+
+Observables can be either Hot or Cold. But what does this mean? A Hot Observable may start emitting data as soon as its created and is considered to be hot due to the fact that when an observer subscribes it begins recieving data somewhere in the middle of the data stream. A Cold Observable on the other hand will always emit data from the beginning of when it was created - meaning an observer who subscribes will get access to the data stream history and conceptually a window back in time - if the data has been manipulated since.
+
+Example: Netflix uses Reactive Extensions and Observables for their streaming service. An episode of your favourite show on Netflix may be considered a Cold Observable as you have access to always jump from start to end or end to start of the data stream. However, a streaming service which provides Live Streaming may be considered to use Hot Observables as when you tune in, you are getting the data from the point in time at which you subscribed.
 
 ### Restify
 
