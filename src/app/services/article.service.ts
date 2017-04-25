@@ -11,17 +11,15 @@ export class ArticleService {
 
   private createArticleEndPoint = 'http://127.0.0.1:3000/createArticle';
   private getAllArticlesEndPoint = 'http://127.0.0.1:3000/getAllArticles';
-
+  
   private _articles: BehaviorSubject<Article[]> = new BehaviorSubject<Article[]>([]);
-  public articles: Observable<Article[]> = this._articles.asObservable();
   private _filterbySearchSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
   private _filterbyCategory: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   public articlesList: Observable<Article[]>;
 
-
   constructor(private http: Http) {
-    this.articlesList = Observable.combineLatest(this.articles, this._filterbySearchSubject, this._filterbyCategory)
+    this.articlesList = Observable.combineLatest(this._articles, this._filterbySearchSubject, this._filterbyCategory)
       .map(([articles, searchStr, category]) => {
         // g - global (all matches), i - insensitive case
         const re = new RegExp(searchStr, 'gi');
@@ -32,6 +30,7 @@ export class ArticleService {
       });
   }
 
+  // Refactor to return an Observalbe<Article[]>
   public getArticles(): void {
     // Retrieve jwt from localStorage
     let jwt = localStorage.getItem('token');
@@ -45,15 +44,25 @@ export class ArticleService {
     // Pass the headers into a new RequestOptions() object
     const options = new RequestOptions({ headers, withCredentials: true });
 
+    // get() returns Observable
     this.http.get(this.getAllArticlesEndPoint, options)
-      .map((res) => res.json())
-      .subscribe((articlesJSON) => {
+      .map((res) => res.json()) // .map() is a projection of the data - i.e projecting res.json()
+      .subscribe((articlesJSON) => { // res.json() materialising once it has been subscribed to
         // Log JSON res from server
         console.log(articlesJSON);
 
+        // Take the Object Array retrieved from the server and
+        // create a new array using .map() calling the Article.fromJSON() function
+        // on each element in the array
+        // Resulting in a new array - articles of type - Article
         const articles = articlesJSON
-          .map(articlejson => Article.fromJSON(articlejson));
+          .map(articlejson => Article.fromJSON(articlejson)); // .map() here is a different .map()
+        
+        // Log the new array of type - Article
         console.log(articles);
+
+        // Pass the 'next' or new version of the articles array to the
+        // BehaviorSubject this._articles
         this._articles.next(articles);
       });
   }
@@ -82,6 +91,7 @@ export class ArticleService {
   }
 
   public filterBy(filter: string): void {
+    // Pass the filter string to the filterSearchSubject to use in combineLatest()
     this._filterbySearchSubject.next(filter);
   }
 

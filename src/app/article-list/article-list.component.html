@@ -2,40 +2,22 @@
   <div class="ui grid">
     <div class="two column row">
       <div class="left floated column">
-
         <div id="categoryFilter" class="ui labeled icon top right pointing dropdown button">
           <i class="filter icon"></i>
           <span class="text">Filter Posts</span>
           <div class="menu">
-            
             <div class="header">
               <i class="tags icon"></i> Filter by Category
             </div>
             <div class="item" [style.display]="isFiltered ? 'block' : 'none'" (click)="clearFilters()">
               Clear Filter
             </div>
-           
+
             <div class="item" *ngFor="let category of categoryList" (click)="filterByCategory(category)">
               {{ category }}
             </div>
-           
-            
           </div>
         </div>
-
-        <!--<label>
-          <i class="filter icon"></i> Filter by Category
-          
-        <select class="ui dropdown">
-          
-          <option value="">None</option>
-          <option *ngFor="let category of categoryList" [value]="category">{{ category }}</option>
-        </select>
-        </label>-->
-        <!--<div class="ui fluid icon">
-          <i class="filter icon"></i>
-
-        </div>-->
       </div>
 
       <div class="right floated column">
@@ -44,16 +26,10 @@
           <i class="search icon"></i>
         </div>
       </div>
-
     </div>
   </div>
-
   <br/>
-
-
-
   <div class="ui divided items">
     <app-article *ngFor="let article of articles | async" [article]="article"></app-article>
   </div>
 </div>
-<!--<p *ngFor="let article of articles | async">{{ article.title }}</p>-->
