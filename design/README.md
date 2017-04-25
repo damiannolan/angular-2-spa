@@ -80,7 +80,7 @@ Observables are a key concept of RX. An Observable can be thought of as a stream
 A request made to an endpoint for retrieving an array of Articles will return an Observable of type Response - `Observable<Response>`. RXJS offers a large number of different functions that can be used upon an Observable, the one we are most interested in for the case of this project is the `.map()` function. The `.map()` function takes an Observable stream and makes a projection of its data - eg: The stream contains a HTTP response and we want to project the JSON data or body of the response. This can be by calling `.map(res) => res.json()` this can be read as - Project the response, such that we extract the the response's json body.
 However, these projections of data can be chained and we do not actually materialize the result until we call `.subscribe()`. In this instance, by calling `.subscribe(responseJSON)` we are materialising the projection of the response we got initially from our HTTP request. We can then act on the JSON the data that we were after.
 
-The above example is taken from this project in `article.service.ts` file, in which a HTTP response is made to the back-end to retrieve an array of articles.
+The above example is taken from this project in `article.service.ts` file, in which a HTTP Request is made to the back-end to retrieve an array of articles.
 
 ##### Hot and Cold Observables
 
@@ -88,9 +88,26 @@ Observables can be either Hot or Cold. But what does this mean? A Hot Observable
 
 Example: Netflix uses Reactive Extensions and Observables for their streaming service. An episode of your favourite show on Netflix may be considered a Cold Observable as you have access to always jump from start to end or end to start of the data stream. However, a streaming service which provides Live Streaming may be considered to use Hot Observables as when you tune in, you are getting the data from the point in time at which you subscribed.
 
-### Restify
+### What are Graph Databases and Neo4j?
 
-Restify is employed on the back-end to create the server, employ middleware and delegating routes for particular requests made to the server. Middleware acts as a bridge between a request and an end point.
+Graph databases are databases which use graph structures for storing and collating data to represent meaningful information for a given data set. A Graph database is a database management system with CRUD (Create, Read, Update and Delete) operations working on a graph data model.
+
+In Graph databases vertices are referred to as nodes and perhaps the most key concept for storing data is how edges between vertices or nodes are known as relationships. Relationships depicted via edges directly relate data items within the store and can be uses for traversal of a node tree within a database.
+
+Other types of database such as SQL based databases compute relationships at a rather expensive query time whereas Graph databases store relationships as 'first-class citizens' to make 'join-like' queries of a database as in-expensive as possible.
+Thus, Graph databases are considered to be NoSQL databases, however they offer much more complexity than that of a Document Store such as MongoDB or CouchDB.
+To those who are experienced and comfortable with concepts such as entity relationship diagrams, the idea of storing data in a Graph-like manner should come quite naturally.
+
+### Neo4j
+
+Neo4j is an open-source NoSQL graph database implemented in Java and Scala. It has been under development since 2003 and available publicly since 2007. The entirity of Neo4j's source code is available on their [Github](https://github.com/neo4j/neo4j) where they have over 40,000 commits from over 140 different contributors. With Neo4j graphs are composed of two basic elements - Nodes and Relationships. Nodes and Relationships can be easily compared to vertices and edges of a traditional graph respectively. Nodes and Relationships allow for complex patterns throughout graph databases and can be much more expressive than static tables. Because it JVM based, Neo4j makes for a very useful database to be used cross platform and also offers Clustering and ACID Transactions like that of a SQL database.
+
+### Cypher Query Language
+
+CQL - Cypher Query Language or more commonly known as 'Cypher' is a declaritive query language created by Neo Technology for Neo4j but has since been made available and adopted by other graph databases such as SAP HANA and AgensGraph.
+Much of Cypher's syntax is inspired from SQL so being familiar with a database such as MySQL will give users a decent base level of know how when adopting Cypher.
+Being a declaritive language, Cypher allows users to state what they want to retrieve from a graph and not how to achieve doing it. Cypher allows for expressive and efficient querying and updating of data.
+With Cypher Nodes are expressed using round brackets or parentheses: ( ), relationships as square brackets: [ ] and properties using curly braces: { }.
 
 ## Architecture
 
