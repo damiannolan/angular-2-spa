@@ -45,6 +45,34 @@ The command above will generate an entire new directory for a new componenet nam
 
 The use of a hierarchy of components means that components can be nested inside other components. Eg: An ArticleList Component may be made up of a series of Article Components.
 
+Services in Angular 2 are whats known as Injectables. Injectables can be injected via dependency injection in the constructor of a component. Services are singletons in Angular 2 which means there is only ever one instance of a service existing through an applications lifecycle, whereas a Component has the lifecyle of initlisation on navigated to and destruction and garbage collected on navigated from the particular route in which they exist. 
+
+Angular 2 offers a number of different lifecycle hooks in which you can tap into by implementing the appropriate interface and overriding the function name. Eg: Writing the ngOnInit() function or ngOnDestroy() function.
+
+### The Event Loop
+
+Node.js and browser based applications such as this one that uses javascript under the hood have a concurrency model based on what is known as the Event Loop. The Event Loop runs on a single thread and employs a queue of callback functions. When an asynchronous function is called, it is pushed onto the queue of callback functions and the Javascript engine doesn't run onto the next tick of the Event Loop until the async function has finished executing.
+
+This model resembles the snippet below taken from [developer.mozilla.org](https://developer.mozilla.org/en/docs/Web/JavaScript/EventLoop)
+
+    while (queue.waitForMessage()) {
+        queue.processNextMessage();
+    }
+
+### Promises and Observables
+
+Promises are in use throughout much of this entire project. Promises are a placeholder or proxy that represent the value or result of an asynchronous operation. A Promise has 3 states it can be in:
+
+- Pending - where the asynchronous operation hasn't completed yet
+- Fullfilled - where the asynchronous operation is resolved with a result
+- Rejected - where the asynchronous operation is rejected with a reason for failure
+
+In Angular 1.6, Promises were exposed using the $q service. In Angular 2 using Typescript we can have functions that return a Promise of a given type. Promises are considered to be *Thenable*, using the .then() function. The `then()` function takes two arguments which are callback functions to be run for either success or failure of the Promise and also returns a Promise. This is for the use of what is known as Promise chaining.
+
+### Restify
+
+Restify is employed on the back-end to create the server, employ middleware and delegating routes for particular requests made to the server. Middleware acts as a bridge between a request and an end point.
+
 ## Architecture
 
 ## Features in the current state
