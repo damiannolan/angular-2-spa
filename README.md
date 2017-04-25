@@ -1,31 +1,11 @@
 # Angular2Webapp
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.26.
+This project was generated with [angular-cli](https://github.com/angular/angular-cli).
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+# Overview
 
-## Code scaffolding
+The following repository contains the front-end submission of a 3 rd year final year project demonstrating a Professional Practise in IT and a well structured, easy-to-use single page web application. The single page web application contained in this repository has been built using Angular 2 and Typescript.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
+It acts as a consumer of a back-end RESTful API also written using Typescript and runs using the very popular NodeJS server-side platform. 
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Deploying to GitHub Pages
-
-Run `ng github-pages:deploy` to deploy to GitHub Pages.
-
-## Further help
-
-To get more help on the `angular-cli` use `ng help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+The repository containing the back-end web API can be found [HERE](https://github.com/damiannolan/typescript-api).
