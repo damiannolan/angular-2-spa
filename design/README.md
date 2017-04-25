@@ -159,8 +159,44 @@ With Cypher Nodes are expressed using round brackets or parentheses: ( ), relati
 
 ## Features in the current state
 
+1. Securing a Facebook Access Token
+2. Verification of Facebook Token on server
+3. Exchanging the Facebook Access Token for a JSON Web Token
+4. Authorization Guard & Protected API Routes using JWT
+5. Ability to obtain article posts from server using Authorization Header in Request
+6. Populating a category list from server
+7. Ability to create an article post under a particular category using Reactive Forms
+8. Ability to filter and livesearch posts using Observables
+
 ## Limitations and Known Bugs
+
+Throughout the process of development there was a number of issues I faced which I feel held back my progression with getting the project to where I intitally aimed my target goal in setting out.
+
+Hours and hours were spent trying to trying to debug an issue with Facebook Picture URL's and character encoding. The issue I was faced with was that in creating a JWT on my server side with the picture URL of a user as a property on the payload, I could not correctly decode the JWT on the client-side using Javascripts `atob()` function. I later learned from digging through Facebook's API that the picture URL's are base64 URL Encoded and not reguarly base64 Encoded, meaning that depending on certain characters in the URL issues could be faced when decoding with `atob()`. This was a nightmare of a problem to solve and really put a spoiler on working with Facebook as the issue was completely inconsistent and dependent on a URL having certain characters or not. In the current state of the application there is quite a 'hacky' fix for the problem I faced. At the moment the picture URL server side is being double wrapped by using `base64.encode()` on the picture URL payload property and then signing the JWT with the payload. This means that client side in `auth.service.ts` we must use `atob()` twice. Once on the tokenbody and again on the picture URL property.
+
+Over the past number of days I having been reading up on libraries that can bypass this problem by not using `atob()` for decoding the token and employing a JWT Decoding library instead.
 
 ## Future Development
 
+My future plans for development of the application are to get it to where I initially envisioned it to be when setting out in the beginning.
+
+Features:
+
+- Ability to sign up with various other platforms - Google, Twitter..etc
+- Ability to sign up without a 3rd party platform
+- Ability for users to follow one another
+- Only show posts on home page for the current user and their follower list
+- Ability to view a follower list and following list of users
+- More dynamic post creation - Choose to post an article, advert or notice
+- Replies on posts - forum threads
+- Add a rich user profiling system - Allow users to customize their profile
+- Customization of profile to include the user's ability regarding instruments, interests in genres etc.
+- An inbox and messaging system to enable users to communicate through the app privately
+
 ## Conclusion
+
+Although I am disappointed with how the application turned out visually or from a user's perspective, I feel I have learned a lot from the experience and a lot about myself as a developer. I initially set out to create a rich front end user experience with many features, which I later learned was a unrealistic ambition given the amount of time for the project and balancing that between other modules throughout the semester. Despite this, I feel my focus was lended more towards learning about new technologies and how to apply myself to learning about different frameworks and create a project using them in a limited amount of time.
+
+I feel the time I spent applying myself to learning about full stack development was invaluable, and the hands on experience with an array of different libraries and technologies gave me true insight into real world development and the problems any developer can be faced with day to day. From my experiences using Typescript as the primary language for development throughout the project I feel it has a lot to offer and I would be recommending it to many web developers to allow them have a richer programming experience by using it.
+
+Overall I think this has been more of learning experience than anything else and I am happier for that than attempting to build a market ready application with low value. This application is not market ready however the skills I have developed throughout building it have given me true insight into the development of single page applications.
