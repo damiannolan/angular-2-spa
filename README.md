@@ -10,17 +10,20 @@ It acts as a consumer of a back-end RESTful API also written using Typescript an
 
 The repository containing the back-end RESTful API can be found [HERE](https://github.com/damiannolan/typescript-api).
 
-To get up and running with the back-end please follow the installation steps in the repostiory linked above. The documentation for this project will be stored in this repository under the directory named - design.
+To get up and running with the back-end please follow the installation steps in the repostiory linked above. The documentation for this project encompassing both front-end and back-end will be stored in this repository under the directory named - design. This project should be considered as a prototype and an experiment in getting to grips with technologies such as NodeJS, Angular, Typescript and various other libraries.
 
 ## Prerequisites
 
 - [Angular CLI](https://cli.angular.io/)
 
-    npm install -g @angular/cli
-
 ## Quickstart
+
+    npm install -g @angular/cli
 
     npm install
 
     ng serve
 
+## Design
+
+A document containing a detailed insight into the design decisions made with the project can be found in the design directory of this respository or by clicking the link below.
