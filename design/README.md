@@ -16,7 +16,7 @@ Prerequisites and dependancies have been specified on the front page README.md f
 A sample Neo4j database directory shall be provided in a zip file and housed in the back-end repository.
 The application has been primarily developed and tested using Google Chrome as the web browser and for debugging purposes.
 
-## Technology
+## Technology & Architecture
 
 ### Why use Typescript?
 
@@ -88,6 +88,54 @@ Observables can be either Hot or Cold. But what does this mean? A Hot Observable
 
 Example: Netflix uses Reactive Extensions and Observables for their streaming service. An episode of your favourite show on Netflix may be considered a Cold Observable as you have access to always jump from start to end or end to start of the data stream. However, a streaming service which provides Live Streaming may be considered to use Hot Observables as when you tune in, you are getting the data from the point in time at which you subscribed.
 
+### Typescript Restify API Server
+
+As previously mentioned on the front page README of this repository the Typescript Restify API Server which accompanies the front end Angular 2 project can be found at this url - https://github.com/damiannolan/typescript-api
+
+Setting up a development environment for creating a Node.js server written in Typescript using `npm scripts` was quiet an arduous task. The back end for the project is written in Typescript and transpiled to Javascript using the tsc compiler and run on Node.js using an `npm script` for development process. By calling `npm run watch` when starting the Typescript Restify API Server there is a couple of different things going on. Firstly, a clean is done on the Javascript target directory - `lib`. Then the Typescript source code under the `src` directory is transpiled into `lib` where Node.js can run the target file `server.js` using [PM2-dev](http://pm2.keymetrics.io/docs/usage/pm2-development/) which allows you to start an application and restart it upon a file change. Using the npm concurrently package with -k: --kill-others which kills others processes if one exits or dies, we can then restart the whole chain of events by triggering this event when pm2-dev detects a change in `src` directory. By using -r and --raw flags on the scripts we can de-prettify any logging styling done by either of the packages and then pipe the output through Bunyan for logging - ` | bunyan`.
+
+The server application has been created using Restify. Restify is a Node.js REST framework specically intended for use in the building of web service API's. Restify allows developers to get a simple REST service up and running, the ability to employ middleware eg: CORS - (Cross Origin Resource Sharing) and the creation of API routes for incoming HTTP requests.
+
+The web service is intended to be loosely coupled and written in a modular fashion, paying close attention to the separtion of concerns. While building this web service, I have abstracted database interaction into it's own specific directory and imported needed functions into their respective routes. The main `server.ts` file is located in the root of the `src` directory of the back-end repository.
+
+### Facebook Authorization
+
+Through the lifecyle of the development of this project it was one of my main goals to include Facebook authentication as the primary means of logging into the application. For many weeks, I spent a lot of hands on time playing around with [passport.js](http://passportjs.org/), however due to limitations of time and having difficulties with the library, I chose to delegate the Facebook login system to a library on the front-end application called [hello.js](https://adodson.com/hello.js/). Hello.js is a client-side Javascript SDK for authentication with OAuth2 web services and handles querying a platforms API such as Facebook or Twitter.
+
+### JWT - JSON Web Tokens
+
+From my time spent researching OAuth2 and Facebook Authentication I grew more interested in authorization as a whole and began thinking about how I could secure my own API routes. I learned about JSON Web Tokens and how they can be used to provide a client with a Authorization Bearer token. Having accomplished securing a user's Facebook Access Token on my client side using Hello.js, I saw it fit to then exchange the Facebook Access Token for my own JWT created on my back-end.
+
+The application follows the procedure in the following order:
+
+1. Secure Facebook Access Token
+2. HTTP Post to server-side route - `/auth/facebook`
+3. Verify that the token is valid by hitting the Facebook API
+4. Create a new user in the database if they do not already exist
+5. Issue them with a JSON Web Token created on my own Typescript Restify Server
+
+While carrying this process out I truly began to see the benefits of Restify and Typescript. When hitting my API route `/auth/facebook`, I provided an array of functions to be executed in sequence by calling Restify's `next()` function. The aforementioned functions dealt with with each of the tasks - Verify Facebook Token, Creating a User if not already existing and Issuing of a JSON Web Token. I was able to use Typescript's inheritence to tag on my user profile to the Request object and then access it in my create user function for saving to the database.
+
+From this, I could then store my JWT on my client side using LocalStorage and decode my user object from the token using Javascript's `atob()` function - for base64 decoding.
+
+#### Protecting Restify API Routes
+
+The primary reason for issuing a client with a JWT is to protect the routes of the Restify API by using the middleware provided by JWT. The node JSONWebToken package allows the use of middleware to protect routes unless they are whitelisted in the JWT Configuration. By doing this, we then need the Bearer token issued by the server to successfully make HTTP requests to endpoints across the server. The bearer token can be provided in a HTTP authorization header.
+
+To demonstrate the protected routes, screenshots are provided below.
+
+#### Without Authorization Header
+
+![example1](http://i.imgur.com/gQkqCoq.png)
+
+#### With Authorization Header
+
+![example2](http://i.imgur.com/bjh0eB1.png)
+
+#### Creating an Auth Guard
+
+A further benefit of storing a JWT in LocalStorage then meant I could setup an Authorization Guard for routes on my front end. All routes on the front end application except for /login are protected by using an Auth Guard in Angular 2. To create an Auth Guard one most implement the CanActivate interface and override the `canActive()` function. By doing this, we can then employ the Auth Guard to protect whatever routes we choose in `app.module.ts`.
+
 ### What are Graph Databases and Neo4j?
 
 Graph databases are databases which use graph structures for storing and collating data to represent meaningful information for a given data set. A Graph database is a database management system with CRUD (Create, Read, Update and Delete) operations working on a graph data model.
@@ -108,8 +156,6 @@ CQL - Cypher Query Language or more commonly known as 'Cypher' is a declaritive 
 Much of Cypher's syntax is inspired from SQL so being familiar with a database such as MySQL will give users a decent base level of know how when adopting Cypher.
 Being a declaritive language, Cypher allows users to state what they want to retrieve from a graph and not how to achieve doing it. Cypher allows for expressive and efficient querying and updating of data.
 With Cypher Nodes are expressed using round brackets or parentheses: ( ), relationships as square brackets: [ ] and properties using curly braces: { }.
-
-## Architecture
 
 ## Features in the current state
 

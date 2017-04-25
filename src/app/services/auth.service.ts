@@ -52,7 +52,6 @@ export class AuthService {
         };
 
         const headers = new Headers({
-//          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json' 
         });
         const options = new RequestOptions(headers);
