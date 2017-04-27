@@ -200,3 +200,17 @@ Although I am disappointed with how the application turned out visually or from 
 I feel the time I spent applying myself to learning about full stack development was invaluable, and the hands on experience with an array of different libraries and technologies gave me true insight into real world development and the problems any developer can be faced with day to day. From my experiences using Typescript as the primary language for development throughout the project I feel it has a lot to offer and I would be recommending it to many web developers to allow them have a richer programming experience by using it.
 
 Overall I think this has been more of learning experience than anything else and I am happier for that than attempting to build a market ready application with low value. This application is not market ready however the skills I have developed throughout building it have given me true insight into the development of single page applications.
+
+## References
+
+[Typescript](https://www.typescriptlang.org/)
+[Angular](https://angular.io/)
+[RxJS](http://reactivex.io/rxjs/)
+[Restify](http://restify.com/)
+[PM2](http://pm2.keymetrics.io/)
+[JWT](https://jwt.io/)
+[Neo4j](https://neo4j.com/)
+[Neo4j - Javascript Driver](https://github.com/neo4j/neo4j-javascript-driver)
+[hellojs](https://adodson.com/hello.js/)
+[Moment](https://momentjs.com/)
+[bunyan](https://github.com/trentm/node-bunyan)
